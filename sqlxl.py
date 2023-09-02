@@ -16,15 +16,17 @@ def main():
     print('	*** Database maker ***')
 
     # get the name of the dictionary
-    dictionary_name = input("What is the name of your Data Dictionary?\n")
+    dictionary_name = "Segway"
+    #input("What is the name of your Data Dictionary?\n")
     
     # get the date
     program_date = datetime.datetime.now().strftime("%Y")
 
-    description = input("What's your project about description? ")
+    description = ""
+    #input("What's your project about description? ")
 
     # Let the user know the program finished
-    input("Done! Press enter to continue")
+    #input("Done! Press enter to continue")
 
     # build the file name
     sql_file = dictionary_name.replace(' ', '_') + ".sql"
@@ -32,7 +34,7 @@ def main():
 
 
     # Open the file and save the file handle to a variable
-    the_file = open(sql_file, "a")
+    the_file = open(sql_file, "w")
 
     # 2 Write the elements of the file
     the_file.write('/*\nFILE: ' + sql_file + '\n')
@@ -49,22 +51,33 @@ def main():
     the_file.write('CREATE DATABASE ' + dictionary_name + ';\n')
     the_file.write('USE ' + dictionary_name + ';\n')
     the_file.write('\n')
-    the_file.write('/* **************************************************************************** \n \t Building table \n ***************************************************************************** */')
+    the_file.write('/* **************************************************************************** \n \t Building table */')
+    the_file.write('\n')
+    the_file.write('\n')
 
-    # Copy the CSV file to the SQL file
-    shutil.copyfile(csv_file, sql_file)
+    # Open the csv file for reading
+    with open(csv_file, 'r+') as csv:
+        content1 = csv.read()
 
+    # Open the sql file for appending (use 'a' mode)
+    with open(sql_file, 'w') as sql:
+
+    # Write the content of the first file to the second file
+        sql.write(content1)
 
     # with auto-closes the file and r+ is read and write within the file
     with open('Segway.sql', 'r+') as f:
         content = f.read()
-        content = content.replace(',,,,,,,,,,,,,,', '\n')
-        parentheses = re.findall("\((.*?)\)", content)
-        content = content.replace()
-        
+        content = content.replace('\n', '')
+        content = content.replace(',,,,,,,,,,,,,,', '\n***************************************************************************** */ \nDROP TABLE IF EXISTS ')
+        content = re.sub(r'\([^)]*\)', '', content)
+        content = content.replace('nvarchar\n', 'nvarchar(')
         f.seek(0)
         f.write(content)
-        f.truncate()
+
+
+
+    
 
 # run the main() function
 main()
