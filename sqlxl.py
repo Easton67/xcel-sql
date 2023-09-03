@@ -37,6 +37,8 @@ def main():
     the_file = open(sql_file, "w")
 
     # 2 Write the elements of the file
+
+    '''
     the_file.write('/*\nFILE: ' + sql_file + '\n')
     the_file.write('DATE: ' + program_date + '\n')
     the_file.write('AUTHOR: Liam Easton\n')
@@ -54,6 +56,7 @@ def main():
     the_file.write('/* **************************************************************************** \n \t Building table */')
     the_file.write('\n')
     the_file.write('\n')
+    '''
 
     # Open the csv file for reading
     with open(csv_file, 'r+') as csv:
@@ -63,15 +66,21 @@ def main():
     with open(sql_file, 'w') as sql:
 
     # Write the content of the first file to the second file
-        sql.write(content1)
+        sql.write(content1) 
 
     # with auto-closes the file and r+ is read and write within the file
     with open('Segway.sql', 'r+') as f:
         content = f.read()
-        content = content.replace('\n', '')
-        content = content.replace(',,,,,,,,,,,,,,', '\n***************************************************************************** */ \nDROP TABLE IF EXISTS ')
+        content = content.replace(',,,,,,,,,,,,,,', '\n')        
+        content = content.replace('\n\n\n', '\n***************************************************************************** */ \nDROP TABLE IF EXISTS ')
+        content = content.replace('\n\n', ';\nCREATE TABLE(')
         content = re.sub(r'\([^)]*\)', '', content)
-        content = content.replace('nvarchar\n', 'nvarchar(')
+        content = content.replace(',', ' ')
+        content = content.replace('             ', ';\nCREATE TABLE(')
+        content = content.replace('\n\n', ';\nCREATE TABLE(')
+        content = re.sub(r'\.(?!\S)', '.\n;\n\n/* *****************************************************************************\n\tBuilding table', content)
+        #content = content.replace('\n', '')
+        #content = content.replace('nvarchar\n', 'nvarchar(')
         f.seek(0)
         f.write(content)
 
