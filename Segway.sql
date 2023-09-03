@@ -1,16 +1,22 @@
-FIELD DATATYPE LENGTH DEFAULT IDENTITY START INCREMENT NULLS INDEX UNIQUE PK FK  REFERENCES COMMENTS
-***************************************************************************** */ 
-DROP TABLE IF EXISTS Employee;
-CREATE TABLE;
-CREATE TABLE(
-RoleID nvarchar 50 no    no yes yes yes    role name is used as ID.
-;
+/*
+FILE: Segway.sql
+DATE: 2023
+AUTHOR: Liam Easton
+Description
+	 
+*/
+/*******************************************************************************/
 
-/* *****************************************************************************
-	Building table
+-- Standard pattern for creating a database.
+DROP DATABASE IF EXISTS Segway;
+CREATE DATABASE Segway;
+USE Segway;
+
+/* **************************************************************************** 
+	Building table EmployeeRole;
 ***************************************************************************** */ 
 DROP TABLE IF EXISTS EmployeeRole;
-CREATE TABLE( 
+CREATE TABLE(EmployeeRole;
 EmployeeID int  no    no yes  yes yes  Employee.EmployeeID compound primary key.
 ;
 

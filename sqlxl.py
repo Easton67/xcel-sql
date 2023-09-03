@@ -38,7 +38,7 @@ def main():
 
     # 2 Write the elements of the file
 
-    '''
+
     the_file.write('/*\nFILE: ' + sql_file + '\n')
     the_file.write('DATE: ' + program_date + '\n')
     the_file.write('AUTHOR: Liam Easton\n')
@@ -56,7 +56,6 @@ def main():
     the_file.write('/* **************************************************************************** \n \t Building table */')
     the_file.write('\n')
     the_file.write('\n')
-    '''
 
     # Open the csv file for reading
     with open(csv_file, 'r+') as csv:
